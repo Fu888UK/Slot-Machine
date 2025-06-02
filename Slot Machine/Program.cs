@@ -4,18 +4,17 @@
     {
         static void Main(string[] args)
         {
-            const int ONELINE = 1;
-            const int TWOLINES = 2;
-            const int THREELINES = 3;
-            const int THREELINES = 4;
+            const int MIDLINE = 1;
+            const int HORILINES = 2;
+            const int DIAGLINES = 3;
+            const int VERTLINES = 4;
             const int ROW = 3;
             const int COL = 3;
 
             Console.WriteLine("Welcome to the Slots Machine");
-            Console.WriteLine($"Hello, please select the amount you wish to play with, {ONELINE} for $1, {TWOLINES} for $2, {THREELINES} for $3");
-            //modes middle, horizontal, diagonal, vertical 
-            string mode = Console.ReadLine();
-                       
+            Console.WriteLine($"Hello, please select the amount you wish to play with, {MIDLINE} for $1, {HORILINES} for $2, {DIAGLINES} for $3, {VERTLINES} FOR $4");
+             
+            string mode = Console.ReadLine();                       
 
             int selected = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selected}");

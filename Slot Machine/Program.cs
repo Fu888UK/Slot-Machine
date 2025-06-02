@@ -12,7 +12,7 @@
             const int COL = 3;
 
             Console.WriteLine("Welcome to the Slots Machine");
-            Console.WriteLine($"Hello, please select the amount you wish to play with, {MIDLINE} for $1, {HORILINES} for $2, {DIAGLINES} for $3, {VERTLINES} FOR $4");
+            Console.WriteLine($"Please select the mode you wish to play, {MIDLINE} for middle line, {HORILINES} for horizontal lines, {DIAGLINES} for diagonal lines, {VERTLINES} for vertical lines");
              
             string mode = Console.ReadLine();                       
 
@@ -45,31 +45,44 @@
             //check grid/winnings 
 
             //incorporate above to ifs below
-            //need to calify modes, is this do do with amount of wager, the difficulty of the game, ??????
+            bool win = false;
+
+            if (selected == MIDLINE)
+            {
+                //int middleRow = 1;
+                if (grid[1,0] == grid[1,1] && grid[1,0 == [1,2])
+                //if (grid[MIDLINE, 0] == grid[MIDLINE, 1] && grid[MIDLINE, 1] == grid[MIDLINE, 2])
+                {
+                    win = true;
+                
+                }
+
+                //for (int i = 0; i < 3; i++)
+                //{
+                //    for (int j = 0; j < 3; j++)
+                //    {
+                //        grid[i, j] = (char)('0' + rnd.Next(0, 9));
+                //    }
+
+                    //}
 
 
-            //if (selected == 1) 
-            //{
-            //    for (int i = 0; i < 3; i++) 
-            //    {
-            //        for (int j = 0; j < 3; j++) 
-            //        {
-            //            grid[i, j] = (char)('0' + rnd.Next(0, 9));
-            //        }
-            //    }
+            }
+            if (selected == HORILINES)
+            {
 
 
-            //}
-            //if (selected == 2)
-            //{
+            }
+            if (selected == DIAGLINES)
+            {
 
 
-            //}
-            //if (selected == 3)
-            //{
+            }
+            if (selected == VERTLINES)
+            {
 
 
-            //}
+            }
 
 
 

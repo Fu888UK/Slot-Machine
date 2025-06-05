@@ -1,4 +1,7 @@
-﻿namespace Slot_Machine
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
+
+namespace Slot_Machine
 {
     internal class Program
     {
@@ -12,8 +15,13 @@
             const int COL = 3;
 
             Console.WriteLine("Welcome to the Slots Machine");
-            Console.WriteLine($"Please select the mode you wish to play, {MIDLINE} for middle line, {HORILINES} for horizontal lines, {DIAGLINES} for diagonal lines, {VERTLINES} for vertical lines");
-             
+            Console.WriteLine($"Please select the mode you wish to play");
+            Console.WriteLine($"{MIDLINE} = Middle line");
+            Console.WriteLine($"{HORILINES} = Horizontal lines");
+            Console.WriteLine($"{DIAGLINES} = Diagonal lines");
+            Console.WriteLine($"{VERTLINES} = Verticle line");
+            
+
             string mode = Console.ReadLine();                       
 
             int selected = int.Parse(mode);                         //convert string to int 
@@ -32,7 +40,8 @@
                 }             
             }
             //print grid
-            //Console.WriteLine("");
+            Console.WriteLine("");
+
             for (int i = 0; i < ROW; i++)                           //row
             {
                 for (int j = 0; j < COL; j++)                       //col
@@ -43,34 +52,31 @@
             }
 
             //check grid/winnings 
-
-            //incorporate above to ifs below
+                        
             bool win = false;
 
             if (selected == MIDLINE)
             {
                 //int middleRow = 1;
-                if (grid[1,0] == grid[1,1] && grid[1,0 == [1,2])
+                if (grid[1,0] == grid[1,1] && grid[1,0] == grid[1,2])
                 //if (grid[MIDLINE, 0] == grid[MIDLINE, 1] && grid[MIDLINE, 1] == grid[MIDLINE, 2])
                 {
                     win = true;
-                
+                    Console.WriteLine("middle row win");
+                                        
                 }
-
-                //for (int i = 0; i < 3; i++)
-                //{
-                //    for (int j = 0; j < 3; j++)
-                //    {
-                //        grid[i, j] = (char)('0' + rnd.Next(0, 9));
-                //    }
-
-                    //}
-
-
+                               
             }
             if (selected == HORILINES)
             {
-
+                for (int i = 0; i < ROW; i++)                                   //loops through all 3 rows 
+                {
+                    if (grid[i, 0] == grid[i, 1] && grid[i, 1] == grid[i, 2])   //checking for values are the same
+                    {
+                        win = true;
+                        Console.WriteLine($"You win on horizontal line {i + 1}!");
+                    }
+                }
 
             }
             if (selected == DIAGLINES)
@@ -84,8 +90,26 @@
 
             }
 
+            if (!win) 
+            {
+                Console.WriteLine("You lose, good luck with the next try");
+            }
 
 
         }
     }
 }
+
+
+
+
+
+
+//for (int i = 0; i < 3; i++)
+//{
+//    for (int j = 0; j < 3; j++)
+//    {
+//        grid[i, j] = (char)('0' + rnd.Next(0, 9));
+//    }
+
+//}

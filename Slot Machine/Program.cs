@@ -24,8 +24,8 @@ namespace Slot_Machine
 
             string mode = Console.ReadLine();                       
 
-            int selected = int.Parse(mode);                         //convert string to int 
-            Console.WriteLine($"You have selected {selected}");
+            int selectedMode = int.Parse(mode);                         //convert string to int 
+            Console.WriteLine($"You have selected {selectedMode}");
 
             int[,] grid = new int[ROW,COL];                         //2D array 
 
@@ -50,24 +50,33 @@ namespace Slot_Machine
                 }
                 Console.WriteLine();                                //need this in the loop to output like a grid
             }
+            Console.WriteLine();
 
             //check grid/winnings 
-                        
-            bool win = false;
 
-            if (selected == MIDLINE)
+            bool win = true;
+
+            if (selectedMode == MIDLINE)
             {
                 //int middleRow = 1;
-                if (grid[1,0] == grid[1,1] && grid[1,0] == grid[1,2])
-                //if (grid[MIDLINE, 0] == grid[MIDLINE, 1] && grid[MIDLINE, 1] == grid[MIDLINE, 2])
+                // add for loop to make it dynamic
+                //check for losing try
+                
+                for (int i = 1; i < grid.GetLength(0); i++) 
                 {
-                    win = true;
-                    Console.WriteLine("middle row win");
-                                        
-                }
-                               
+                    for (int j = 1; j < grid.GetLength(1); j++) 
+                    {
+                        //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
+                        if (grid[1, 0] == grid[1, 1] && grid[1, 1] == grid[1, 2])   
+                        {
+                            win = false;
+                            Console.WriteLine("middle row win");
+                        }
+                    }
+                }                             
             }
-            if (selected == HORILINES)
+
+            if (selectedMode == HORILINES)
             {
                 for (int i = 0; i < ROW; i++)                                   //loops through all 3 rows 
                 {
@@ -79,12 +88,12 @@ namespace Slot_Machine
                 }
 
             }
-            if (selected == DIAGLINES)
+            if (selectedMode == DIAGLINES)
             {
 
 
             }
-            if (selected == VERTLINES)
+            if (selectedMode == VERTLINES)
             {
 
 

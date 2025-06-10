@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Data;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 
 namespace Slot_Machine
@@ -11,8 +12,8 @@ namespace Slot_Machine
             const int HORILINES = 2;
             const int DIAGLINES = 3;
             const int VERTLINES = 4;
-            const int ROW = 3;
-            const int COL = 3;
+            const int ROWS = 5;
+            const int COLS = 5;
 
             Console.WriteLine("Welcome to the Slots Machine");
             Console.WriteLine($"Please select the mode you wish to play");
@@ -27,24 +28,24 @@ namespace Slot_Machine
             int selectedMode = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selectedMode}");
 
-            int[,] grid = new int[ROW,COL];                         //2D array 
+            int[,] grid = new int[ROWS,COLS];                         //2D array 
 
             Random rnd = new Random();                       
 
             //populate grid 
-            for (int i = 0; i < ROW; i++)                           //row
+            for (int i = 0; i < ROWS; i++)                           //row
             {
-                for (int j = 0; j < COL; j++)                       //col
+                for (int j = 0; j < COLS; j++)                       //col
                 {
-                    grid[i, j] = rnd.Next(0, 5);
+                    grid[i, j] = rnd.Next(0, 1);
                 }             
             }
             //print grid
             Console.WriteLine("");
 
-            for (int i = 0; i < ROW; i++)                           //row
+            for (int i = 0; i < ROWS; i++)                           //row
             {
-                for (int j = 0; j < COL; j++)                       //col
+                for (int j = 0; j < COLS; j++)                       //col
                 {
                     Console.Write(grid[i, j] + " ");
                 }
@@ -58,29 +59,31 @@ namespace Slot_Machine
 
             if (selectedMode == MIDLINE)
             {
-                //int middleRow = 1;
-                // add for loop to make it dynamic
+                // add for loop to make it dynamic      // need to modify win check conditons so they work for any size grid 
                 //check for losing try
-                
-                for (int i = 1; i < grid.GetLength(0); i++) 
-                {
-                    for (int j = 1; j < grid.GetLength(1); j++) 
+
+                //int middleRow = 1;
+                int midRow = ROWS / 2;
+
+                for (int i = 1; i < COLS; i++)
+                {                   
+                    
+                    //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
+                    if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
                     {
-                        //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
-                        if (grid[1, 0] == grid[1, 1] && grid[1, 1] == grid[1, 2])   
-                        {
-                            win = false;
-                            Console.WriteLine("middle row win");
-                        }
+                        win = false;
+                        //Console.WriteLine("middle row win");
                     }
-                }                             
+                    
+                }
             }
 
             if (selectedMode == HORILINES)
             {
-                for (int i = 0; i < ROW; i++)                                   //loops through all 3 rows 
+                for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
                 {
-                    if (grid[i, 0] == grid[i, 1] && grid[i, 1] == grid[i, 2])   //checking for values are the same
+                    for (int j = 0; j < COLS; j++)
+                        if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same
                     {
                         win = true;
                         Console.WriteLine($"You win on horizontal line {i + 1}!");
@@ -88,20 +91,20 @@ namespace Slot_Machine
                 }
 
             }
-            if (selectedMode == DIAGLINES)
-            {
-
-
-            }
             if (selectedMode == VERTLINES)
             {
 
 
             }
-
-            if (!win) 
+            if (selectedMode == DIAGLINES)
             {
-                Console.WriteLine("You lose, good luck with the next try");
+
+
+            }
+
+            if (win) //change to else
+            {
+                Console.WriteLine("You win, good luck with the next try");
             }
 
 
@@ -110,7 +113,21 @@ namespace Slot_Machine
 }
 
 
-
+//int midRow = ROWS / 2;
+//bool midLineWin = true;
+//for (int j = 1; j < COLS; j++)
+//{
+//    if (grid[midRow, j] != grid[midRow, 0])
+//    {
+//        midLineWin = false;
+//        break;
+//    }
+//}
+//if (midLineWin)
+//{
+//    win = true;
+//    Console.WriteLine($"Middle row {midRow + 1} win!");
+//}
 
 
 

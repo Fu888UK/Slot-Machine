@@ -10,17 +10,17 @@ namespace Slot_Machine
         {
             const int MIDLINE = 1;
             const int HORILINES = 2;
-            const int DIAGLINES = 3;
-            const int VERTLINES = 4;
-            const int ROWS = 5;
-            const int COLS = 5;
+            const int VERTLINES = 3;
+            const int DIAGLINES = 4;
+            const int ROWS = 3;
+            const int COLS = 3;
 
             Console.WriteLine("Welcome to the Slots Machine");
             Console.WriteLine($"Please select the mode you wish to play");
             Console.WriteLine($"{MIDLINE} = Middle line");
             Console.WriteLine($"{HORILINES} = Horizontal lines");
-            Console.WriteLine($"{DIAGLINES} = Diagonal lines");
-            Console.WriteLine($"{VERTLINES} = Verticle line");
+            Console.WriteLine($"{VERTLINES} = Diagonal lines");
+            Console.WriteLine($"{DIAGLINES} = Verticle line");
             
 
             string mode = Console.ReadLine();                       
@@ -30,14 +30,15 @@ namespace Slot_Machine
 
             int[,] grid = new int[ROWS,COLS];                         //2D array 
 
-            Random rnd = new Random();                       
+            Random rnd = new Random();    
+            //create test grid by hard coding
 
             //populate grid 
             for (int i = 0; i < ROWS; i++)                           //row
             {
                 for (int j = 0; j < COLS; j++)                       //col
                 {
-                    grid[i, j] = rnd.Next(0, 1);
+                    grid[i, j] = rnd.Next(0, 5);
                 }             
             }
             //print grid
@@ -51,18 +52,13 @@ namespace Slot_Machine
                 }
                 Console.WriteLine();                                //need this in the loop to output like a grid
             }
-            Console.WriteLine();
+            Console.WriteLine();                       
 
-            //check grid/winnings 
-
-            bool win = true;
+            bool win = true;                                //check grid/winnings 
 
             if (selectedMode == MIDLINE)
-            {
-                // add for loop to make it dynamic      // need to modify win check conditons so they work for any size grid 
-                //check for losing try
-
-                //int middleRow = 1;
+            {         
+                               
                 int midRow = ROWS / 2;
 
                 for (int i = 1; i < COLS; i++)
@@ -72,45 +68,81 @@ namespace Slot_Machine
                     if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
                     {
                         win = false;
-                        //Console.WriteLine("middle row win");
-                    }
-                    
+                        Console.WriteLine("middle row lose");
+                        
+                    }                    
                 }
+                
             }
 
             if (selectedMode == HORILINES)
             {
                 for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
                 {
-                    for (int j = 0; j < COLS; j++)
-                        if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same
+                    for (int j = 0; j < COLS; j++) 
                     {
-                        win = true;
-                        Console.WriteLine($"You win on horizontal line {i + 1}!");
+                        if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                        {
+                            win = false;
+                            Console.WriteLine($"You lose on horizontal line {i + 1}!");
+                            break;
+
+                        }
+                        //Console.WriteLine($"You lose on horizontal line {i + 1}!");
+
                     }
+                    
                 }
+                //Console.WriteLine("You lose on horizontal line");
 
             }
             if (selectedMode == VERTLINES)
             {
+                for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
+                {
+                    for (int j = 0; j < ROWS; j++) 
+                    {
+                        if (grid[0, j] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                        {
+                            win = false;
+                            Console.WriteLine($"You lose on vertical line {i + 1}!");
+                            break;
 
+                        }
+                    }
+                        
+                }
+                Console.WriteLine("You lose on vertical line");
 
             }
-            if (selectedMode == DIAGLINES)
+            if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2
             {
-
+                for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
+                {
+                    for (int j = 0; j < ROWS; j++)
+                        if (grid[0, j] != grid[i, j])                            //checking for values are the same                                                   
+                        {
+                            win = false;
+                            //Console.WriteLine($"You win on horizontal line {i + 1}!");
+                            
+                        }
+                }
 
             }
 
-            if (win) //change to else
+            if (win) //change to else?
             {
                 Console.WriteLine("You win, good luck with the next try");
             }
-
-
+            
         }
     }
 }
+
+
+// add for loop to make it dynamic      // need to modify win check conditons so they work for any size grid 
+//check for losing try
+
 
 
 //int midRow = ROWS / 2;

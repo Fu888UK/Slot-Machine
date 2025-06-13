@@ -19,8 +19,8 @@ namespace Slot_Machine
             Console.WriteLine($"Please select the mode you wish to play");
             Console.WriteLine($"{MIDLINE} = Middle line");
             Console.WriteLine($"{HORILINES} = Horizontal lines");
-            Console.WriteLine($"{VERTLINES} = Diagonal lines");
-            Console.WriteLine($"{DIAGLINES} = Verticle line");
+            Console.WriteLine($"{VERTLINES} = Verticle lines");
+            Console.WriteLine($"{DIAGLINES} = Diagonal lines");
             
 
             string mode = Console.ReadLine();                       
@@ -28,19 +28,25 @@ namespace Slot_Machine
             int selectedMode = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selectedMode}");
 
-            int[,] grid = new int[ROWS,COLS];                         //2D array 
+            //int[,] grid = new int[ROWS,COLS];                         //2D array 
 
-            Random rnd = new Random();    
+            //Random rnd = new Random();
             //create test grid by hard coding
+            int[,] testGrid = new int[3, 3]
+            {
+                {0,1,2},
+                {0,0,2},
+                {0,1,2}
+            };
 
             //populate grid 
-            for (int i = 0; i < ROWS; i++)                           //row
-            {
-                for (int j = 0; j < COLS; j++)                       //col
-                {
-                    grid[i, j] = rnd.Next(0, 5);
-                }             
-            }
+            //for (int i = 0; i < ROWS; i++)                           //row
+            //{
+            //    for (int j = 0; j < COLS; j++)                       //col
+            //    {
+            //        grid[i, j] = rnd.Next(0, 5);
+            //    }             
+            //}
             //print grid
             Console.WriteLine("");
 
@@ -48,7 +54,7 @@ namespace Slot_Machine
             {
                 for (int j = 0; j < COLS; j++)                       //col
                 {
-                    Console.Write(grid[i, j] + " ");
+                    Console.Write(testGrid[i, j] + " ");
                 }
                 Console.WriteLine();                                //need this in the loop to output like a grid
             }
@@ -56,53 +62,53 @@ namespace Slot_Machine
 
             bool win = true;                                //check grid/winnings 
 
-            if (selectedMode == MIDLINE)
-            {         
+            //if (selectedMode == MIDLINE)
+            //{         
                                
-                int midRow = ROWS / 2;
+            //    int midRow = ROWS / 2;
 
-                for (int i = 1; i < COLS; i++)
-                {                   
+            //    for (int i = 1; i < COLS; i++)
+            //    {                   
                     
-                    //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
-                    if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
-                    {
-                        win = false;
-                        Console.WriteLine("middle row lose");
+            //        //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
+            //        if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
+            //        {
+            //            win = false;
+            //            Console.WriteLine("middle row lose");
                         
-                    }                    
-                }
+            //        }                    
+            //    }
                 
-            }
+            //}
 
-            if (selectedMode == HORILINES)
-            {
-                for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
-                {
-                    for (int j = 0; j < COLS; j++) 
-                    {
-                        if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
-                        {
-                            win = false;
-                            Console.WriteLine($"You lose on horizontal line {i + 1}!");
-                            break;
+            //if (selectedMode == HORILINES)
+            //{
+            //    for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
+            //    {
+            //        for (int j = 0; j < COLS; j++) 
+            //        {
+            //            if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+            //            {
+            //                win = false;
+            //                Console.WriteLine($"You lose on horizontal line {i + 1}!");
+            //                break;
 
-                        }
-                        //Console.WriteLine($"You lose on horizontal line {i + 1}!");
+            //            }
+            //            //Console.WriteLine($"You lose on horizontal line {i + 1}!");
 
-                    }
+            //        }
                     
-                }
-                //Console.WriteLine("You lose on horizontal line");
+            //    }
+            //    //Console.WriteLine("You lose on horizontal line");
 
-            }
+            //}
             if (selectedMode == VERTLINES)
             {
                 for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
                 {
                     for (int j = 0; j < ROWS; j++) 
                     {
-                        if (grid[0, j] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                        if (testGrid[0, j] != testGrid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
                         {
                             win = false;
                             Console.WriteLine($"You lose on vertical line {i + 1}!");
@@ -112,23 +118,23 @@ namespace Slot_Machine
                     }
                         
                 }
-                Console.WriteLine("You lose on vertical line");
+               // Console.WriteLine("You lose on vertical line");
 
             }
-            if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2
-            {
-                for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
-                {
-                    for (int j = 0; j < ROWS; j++)
-                        if (grid[0, j] != grid[i, j])                            //checking for values are the same                                                   
-                        {
-                            win = false;
-                            //Console.WriteLine($"You win on horizontal line {i + 1}!");
+            //if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2
+            //{
+            //    for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
+            //    {
+            //        for (int j = 0; j < ROWS; j++)
+            //            if (grid[0, j] != grid[i, j])                            //checking for values are the same                                                   
+            //            {
+            //                win = false;
+            //                //Console.WriteLine($"You win on horizontal line {i + 1}!");
                             
-                        }
-                }
+            //            }
+            //    }
 
-            }
+            //}
 
             if (win) //change to else?
             {

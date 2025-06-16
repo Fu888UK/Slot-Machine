@@ -28,25 +28,26 @@ namespace Slot_Machine
             int selectedMode = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selectedMode}");
 
-            //int[,] grid = new int[ROWS,COLS];                         //2D array 
+            int[,] grid = new int[ROWS,COLS];                         //2D array 
 
-            //Random rnd = new Random();
+            Random rnd = new Random();
+
             //create test grid by hard coding
-            int[,] testGrid = new int[3, 3]
-            {
-                {0,1,2},
-                {0,0,2},
-                {0,1,2}
-            };
+            //int[,] testGrid = new int[3, 3]
+            //{
+            //    {0,1,2},
+            //    {1,1,0},
+            //    {0,1,2}
+            //};
 
             //populate grid 
-            //for (int i = 0; i < ROWS; i++)                           //row
-            //{
-            //    for (int j = 0; j < COLS; j++)                       //col
-            //    {
-            //        grid[i, j] = rnd.Next(0, 5);
-            //    }             
-            //}
+            for (int i = 0; i < ROWS; i++)                           //row
+            {
+                for (int j = 0; j < COLS; j++)                       //col
+                {
+                    grid[i, j] = rnd.Next(0, 5);
+                }
+            }
             //print grid
             Console.WriteLine("");
 
@@ -54,7 +55,7 @@ namespace Slot_Machine
             {
                 for (int j = 0; j < COLS; j++)                       //col
                 {
-                    Console.Write(testGrid[i, j] + " ");
+                    Console.Write(grid[i, j] + " ");
                 }
                 Console.WriteLine();                                //need this in the loop to output like a grid
             }
@@ -108,7 +109,7 @@ namespace Slot_Machine
                 {
                     for (int j = 0; j < ROWS; j++) 
                     {
-                        if (testGrid[0, j] != testGrid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                        if (grid[j, i] != grid[0, i]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
                         {
                             win = false;
                             Console.WriteLine($"You lose on vertical line {i + 1}!");

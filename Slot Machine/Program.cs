@@ -63,88 +63,85 @@ namespace Slot_Machine
 
             bool win = true;                                //check grid/winnings 
 
-            //if (selectedMode == MIDLINE)
-            //{         
-                               
-            //    int midRow = ROWS / 2;
+            if (selectedMode == MIDLINE)
+            {                                        
+                int midRow = ROWS / 2;
 
-            //    for (int i = 1; i < COLS; i++)
-            //    {                   
+                for (int i = 1; i < COLS; i++)
+                {                   
                     
-            //        //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
-            //        if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
-            //        {
-            //            win = false;
-            //            Console.WriteLine("middle row lose");
-                        
-            //        }                    
-            //    }
-                
-            //}
+                    //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
+                    if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
+                    {
+                        win = false;
+                        Console.WriteLine("middle row lose");
+                        break;
+                    }                    
+                }                
+            }
 
-            //if (selectedMode == HORILINES)
-            //{
-            //    for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
-            //    {
-            //        for (int j = 0; j < COLS; j++) 
-            //        {
-            //            if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
-            //            {
-            //                win = false;
-            //                Console.WriteLine($"You lose on horizontal line {i + 1}!");
-            //                break;
+            if (selectedMode == HORILINES)
+            {
+                for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
+                {
+                    for (int j = 0; j < COLS; j++) 
+                    {
+                        if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                        {
+                            win = false;
+                            Console.WriteLine($"You lose on horizontal line {i + 1}!");
+                            break;
 
-            //            }
-            //            //Console.WriteLine($"You lose on horizontal line {i + 1}!");
+                        }                      
 
-            //        }
-                    
-            //    }
-            //    //Console.WriteLine("You lose on horizontal line");
-
-            //}
+                    }                    
+                }                
+            }
             if (selectedMode == VERTLINES)
             {
                 for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
                 {
                     for (int j = 0; j < ROWS; j++) 
                     {
+                        //if (grid[0,i] != grid[j, i])
                         if (grid[j, i] != grid[0, i]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
                         {
                             win = false;
                             Console.WriteLine($"You lose on vertical line {i + 1}!");
                             break;
-
                         }
-                    }
-                        
-                }
-               // Console.WriteLine("You lose on vertical line");
-
+                    }                        
+                }               
             }
-            //if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2
-            //{
-            //    for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
-            //    {
-            //        for (int j = 0; j < ROWS; j++)
-            //            if (grid[0, j] != grid[i, j])                            //checking for values are the same                                                   
-            //            {
-            //                win = false;
-            //                //Console.WriteLine($"You win on horizontal line {i + 1}!");
-                            
-            //            }
-            //    }
-
-            //}
-
+            if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2\   0,2 1,1 2,0/ the 2 lines i need to find        
+                                                        //should i have an if 'for' for each        //should i use else if 
+            {
+                for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
+                {
+                    //[0,0] [i,i ]
+                    //[0, COLS] != [i, COLS??]
+                    if (grid[i, i] != grid[i, COLS+1])                            //checking for values are the same                                                   
+                    {
+                        win = false;
+                        //Console.WriteLine($"You win on horizontal line {i + 1}!");
+                        break;                            
+                    }
+                }
+            }
             if (win) //change to else?
             {
-                Console.WriteLine("You win, good luck with the next try");
+                Console.WriteLine("You win, good luck with the next try");      //???
             }
             
         }
     }
 }
+
+//need to add bet amount/how many lines 
+
+
+
+
 
 
 // add for loop to make it dynamic      // need to modify win check conditons so they work for any size grid 

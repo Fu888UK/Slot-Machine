@@ -22,6 +22,7 @@ namespace Slot_Machine
             Console.WriteLine($"{VERTLINES} = Verticle lines");
             Console.WriteLine($"{DIAGLINES} = Diagonal lines");
             
+            //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
 
             string mode = Console.ReadLine();                       
 
@@ -45,7 +46,7 @@ namespace Slot_Machine
             {
                 for (int j = 0; j < COLS; j++)                       //col
                 {
-                    grid[i, j] = rnd.Next(0, 5);
+                    grid[i, j] = rnd.Next(0, 1);
                 }
             }
             //print grid
@@ -91,7 +92,6 @@ namespace Slot_Machine
                             win = false;
                             Console.WriteLine($"You lose on horizontal line {i + 1}!");
                             break;
-
                         }                      
 
                     }                    
@@ -107,32 +107,58 @@ namespace Slot_Machine
                         if (grid[j, i] != grid[0, i]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
                         {
                             win = false;
-                            Console.WriteLine($"You lose on vertical line {i + 1}!");
+                            Console.WriteLine($"You LOSE on vertical line {i + 1}!");
                             break;
                         }
+                        //if (grid[j, i] != grid[0, i])                                                    
+                        //{
+                        //    //win = true;
+                        //    Console.WriteLine($"You WIN on vertical line {i + 1}!");
+                        //    break;
+                        //}
                     }                        
                 }               
             }
-            if (selectedMode == DIAGLINES)              //3x3 0,0 1,1 2,2\   0,2 1,1 2,0/ the 2 lines i need to find        
-                                                        //should i have an if 'for' for each        //should i use else if 
+            if (selectedMode == DIAGLINES)              //0,0 1,1 2,2  line i need to find     TOP LEFT TO BOTTOM RIGHT                                         
             {
+                //bool winLine1 = true;
                 for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
                 {
                     //[0,0] [i,i ]
                     //[0, COLS] != [i, COLS??]
-                    if (grid[i, i] != grid[i, COLS+1])                            //checking for values are the same                                                   
+                    if (grid[0, 0] != grid[i, i])                            //checking for values are the same                                                   
                     {
                         win = false;
                         //Console.WriteLine($"You win on horizontal line {i + 1}!");
+                        Console.WriteLine("You lose on line 1");
                         break;                            
                     }
                 }
+                //bool winLine2 = true;
+                for (int i = 0; i < ROWS; i++)
+                {
+                    if (grid[0, COLS - 1] != grid[i, ROWS - 1 - i])   //START 0,2 or 0,COLS-1, (COLS wwhich is set to 3 -1 = 2)
+                                                    //CURRENT ROW - [i, COLS(3) - 2 (=1) (-i)] (i is the current row index in the loop)
+                                                    //            - [i, COL(3)] - 3 (=0)] (-i)] 
+                                                    //[i, ROWS -1 -i]
+                                                    //0,2 1,1 2,0  line i need to find   //TOP RIGHT TO BOTTOM LEFT 
+                                                    //0,2 top right corner - 1,1 centre - 2,0 bottom left corner 
+                    {
+                        win = false;
+                        Console.WriteLine("You lose on line 2");
+                        break;
+                    }
+                }                 
+
             }
             if (win) //change to else?
             {
                 Console.WriteLine("You win, good luck with the next try");      //???
             }
-            
+            //else 
+            //{
+            //    Console.WriteLine("you lose");            
+            //}
         }
     }
 }
@@ -141,7 +167,7 @@ namespace Slot_Machine
 
 
 
-
+//if (grid[0, COLS - 1] != grid[i, COLS - 1 - i])
 
 
 // add for loop to make it dynamic      // need to modify win check conditons so they work for any size grid 

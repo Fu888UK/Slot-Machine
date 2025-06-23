@@ -40,13 +40,15 @@ namespace Slot_Machine
             Console.WriteLine($"{HORILINES} = Horizontal lines");
             Console.WriteLine($"{VERTLINES} = Verticle lines");
             Console.WriteLine($"{DIAGLINES} = Diagonal lines");
-            
+                                    
             //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
 
             string mode = Console.ReadLine();                       
 
             int selectedMode = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selectedMode}");
+
+            Console.WriteLine($"You have selected {selectedMode} with a bet amount of {betAmount}");
 
             if (selectedMode > 4)
             {

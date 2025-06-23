@@ -29,6 +29,12 @@ namespace Slot_Machine
             int selectedMode = int.Parse(mode);                         //convert string to int 
             Console.WriteLine($"You have selected {selectedMode}");
 
+            if (selectedMode > 4)
+            {
+                Console.WriteLine("Invalid selection try again");
+                return;
+            }
+
             int[,] grid = new int[ROWS,COLS];                         //2D array 
 
             Random rnd = new Random();
@@ -46,7 +52,7 @@ namespace Slot_Machine
             {
                 for (int j = 0; j < COLS; j++)                       //col
                 {
-                    grid[i, j] = rnd.Next(0, 1);
+                    grid[i, j] = rnd.Next(0, 5);
                 }
             }
             //print grid
@@ -154,11 +160,7 @@ namespace Slot_Machine
             if (win) //change to else?
             {
                 Console.WriteLine("You win, good luck with the next try");      //???
-            }
-            //else 
-            //{
-            //    Console.WriteLine("you lose");            
-            //}
+            }                        
         }
     }
 }

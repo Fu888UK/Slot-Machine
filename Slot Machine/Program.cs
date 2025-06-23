@@ -14,8 +14,27 @@ namespace Slot_Machine
             const int DIAGLINES = 4;
             const int ROWS = 3;
             const int COLS = 3;
+            int balance = 0;
+            int betAmount = 0;
+
 
             Console.WriteLine("Welcome to the Slots Machine");
+
+            while (balance > 0) 
+            {
+                Console.WriteLine($"your current balance is {balance}");
+                Console.WriteLine("How much do you want to bet");
+                if (balance == 0) 
+                {
+                    Console.WriteLine("Sorry, you do not have any credit left to continue");
+                }
+                if (betAmount > balance) 
+                {
+                    Console.WriteLine("you do not have enough in your balance for that bet");
+                }
+
+            }
+            
             Console.WriteLine($"Please select the mode you wish to play");
             Console.WriteLine($"{MIDLINE} = Middle line");
             Console.WriteLine($"{HORILINES} = Horizontal lines");

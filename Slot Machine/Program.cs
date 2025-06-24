@@ -14,8 +14,10 @@ namespace Slot_Machine
             const int DIAGLINES = 4;
             const int ROWS = 3;
             const int COLS = 3;
-            int balance = 0;
-            int betAmount = 0;
+            const int PAYOUT1 = 6;
+            const int PAYOUT2 = 0;
+            int balance = 50;
+            int betAmount = 3;
 
 
             Console.WriteLine("Welcome to the Slots Machine");
@@ -46,11 +48,10 @@ namespace Slot_Machine
             string mode = Console.ReadLine();                       
 
             int selectedMode = int.Parse(mode);                         //convert string to int 
-            Console.WriteLine($"You have selected {selectedMode}");
-
+            
             Console.WriteLine($"You have selected {selectedMode} with a bet amount of {betAmount}");
 
-            if (selectedMode > 4)
+            if (selectedMode > 4)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
             {
                 Console.WriteLine("Invalid selection try again");
                 return;
@@ -96,8 +97,7 @@ namespace Slot_Machine
                 int midRow = ROWS / 2;
 
                 for (int i = 1; i < COLS; i++)
-                {                   
-                    
+                {                 
                     //check 1,0 against 1,1 and 1,2, if 1,0 and 1,1 is wrong once this is checked then no need to check 1,2
                     if (grid[midRow, 0] != grid[midRow, i]) //&& grid[1, i] == grid[1, i])
                     {
@@ -107,7 +107,6 @@ namespace Slot_Machine
                     }                    
                 }                
             }
-
             if (selectedMode == HORILINES)
             {
                 for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
@@ -119,8 +118,7 @@ namespace Slot_Machine
                             win = false;
                             Console.WriteLine($"You lose on horizontal line {i + 1}!");
                             break;
-                        }                      
-
+                        }                    
                     }                    
                 }                
             }
@@ -129,20 +127,13 @@ namespace Slot_Machine
                 for (int i = 0; i < COLS; i++)                                   //loops through all 3 rows 
                 {
                     for (int j = 0; j < ROWS; j++) 
-                    {
-                        //if (grid[0,i] != grid[j, i])
-                        if (grid[j, i] != grid[0, i]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
+                    {                        
+                        if (grid[j, i] != grid[0, i])         //checking for values are the same                                                   
                         {
                             win = false;
                             Console.WriteLine($"You LOSE on vertical line {i + 1}!");
                             break;
-                        }
-                        //if (grid[j, i] != grid[0, i])                                                    
-                        //{
-                        //    //win = true;
-                        //    Console.WriteLine($"You WIN on vertical line {i + 1}!");
-                        //    break;
-                        //}
+                        }                        
                     }                        
                 }               
             }
@@ -150,37 +141,40 @@ namespace Slot_Machine
             {
                 //bool winLine1 = true;
                 for (int i = 0; i < ROWS; i++)                                   //loops through all 3 rows 
-                {
-                    //[0,0] [i,i ]
-                    //[0, COLS] != [i, COLS??]
+                {                    
                     if (grid[0, 0] != grid[i, i])                            //checking for values are the same                                                   
                     {
-                        win = false;
-                        //Console.WriteLine($"You win on horizontal line {i + 1}!");
+                        win = false;                        
                         Console.WriteLine("You lose on line 1");
-                        break;                            
+                        break;
+
                     }
+                    //if (win)
+                    //{
+                    //    Console.WriteLine("You win on line 1");
+                    //}
                 }
                 //bool winLine2 = true;
-                for (int i = 0; i < ROWS; i++)
+                for (int i = 0; i < ROWS; i++)             //0,2 1,1 2,0  line i need to find   //TOP RIGHT TO BOTTOM LEFT 
                 {
-                    if (grid[0, COLS - 1] != grid[i, ROWS - 1 - i])   //START 0,2 or 0,COLS-1, (COLS wwhich is set to 3 -1 = 2)
-                                                    //CURRENT ROW - [i, COLS(3) - 2 (=1) (-i)] (i is the current row index in the loop)
-                                                    //            - [i, COL(3)] - 3 (=0)] (-i)] 
-                                                    //[i, ROWS -1 -i]
-                                                    //0,2 1,1 2,0  line i need to find   //TOP RIGHT TO BOTTOM LEFT 
-                                                    //0,2 top right corner - 1,1 centre - 2,0 bottom left corner 
+                    if (grid[0, COLS - 1] != grid[i, ROWS - 1 - i])    
                     {
                         win = false;
                         Console.WriteLine("You lose on line 2");
                         break;
                     }
-                }                 
+                    //if (win)
+                    //{
+                    //    Console.WriteLine("You win on line 2");
+                    //}
+                }
 
             }
-            if (win) //change to else?
+            else //change to else?
             {
-                Console.WriteLine("You win, good luck with the next try");      //???
+                Console.WriteLine("You win");
+                Console.WriteLine("You have won??????????");
+                //output winnings, need calculation
             }                        
         }
     }
@@ -188,8 +182,13 @@ namespace Slot_Machine
 
 //need to add bet amount/how many lines 
 
-
-
+//MODE 4 win line 2 
+//START 0,2 or 0,COLS-1, (COLS wwhich is set to 3 -1 = 2)
+//CURRENT ROW - [i, COLS(3) - 2 (=1) (-i)] (i is the current row index in the loop)
+//            - [i, COL(3)] - 3 (=0)] (-i)] 
+//[i, ROWS -1 -i]
+//0,2 1,1 2,0  line i need to find   //TOP RIGHT TO BOTTOM LEFT 
+//0,2 top right corner - 1,1 centre - 2,0 bottom left corner
 //if (grid[0, COLS - 1] != grid[i, COLS - 1 - i])
 
 

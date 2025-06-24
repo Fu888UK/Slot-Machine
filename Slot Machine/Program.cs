@@ -12,10 +12,13 @@ namespace Slot_Machine
             const int HORILINES = 2;
             const int VERTLINES = 3;
             const int DIAGLINES = 4;
+            const int INVALID = 4;
             const int ROWS = 3;
             const int COLS = 3;
-            const int PAYOUT1 = 6;
-            const int PAYOUT2 = 0;
+            const int PAYOUT = 3;
+            const int GRID_MAX = 5;
+            const int GRID_MIN = 0;         
+
 
             int balance = 50;
             int betAmount = 3;
@@ -26,30 +29,30 @@ namespace Slot_Machine
             Console.WriteLine($"{MIDLINE} = Middle line");
             Console.WriteLine($"{HORILINES} = Horizontal lines");
             Console.WriteLine($"{VERTLINES} = Verticle lines");
-            Console.WriteLine($"{DIAGLINES} = Diagonal lines");
-
-            string mode = Console.ReadLine();
-
-            int selectedMode = int.Parse(mode);                         //convert string to int                       
-
-            if (selectedMode > 4)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
-            {
-                Console.WriteLine("Invalid selection try again");
-                return;
-            }
-            Console.WriteLine($"You have selected {selectedMode}");
-            Console.WriteLine($"Your starting balance is {balance}");
-            Console.WriteLine($"Your default bet amount is {betAmount}");
+            Console.WriteLine($"{DIAGLINES} = Diagonal lines");           
                        
 
             while (balance > 0)
             {
+                string mode = Console.ReadLine();
+
+                int selectedMode = int.Parse(mode);                         //convert string to int                       
+
+                if (selectedMode > INVALID)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
+                {
+                    Console.WriteLine("Invalid selection try again");
+                    return;
+                }
+                Console.WriteLine($"You have selected {selectedMode}");
+                Console.WriteLine($"Your starting balance is {balance}");
+                Console.WriteLine($"Your default bet amount is {betAmount}");
+
                 //Console.WriteLine($"your current balance is {balance}");
                 //Console.WriteLine("How much do you want to bet");
                 if (betAmount > balance)
                 {
                     Console.WriteLine("you do not have enough in your balance for that bet");
-                    continue;
+                    return;
                 }
 
 
@@ -70,7 +73,7 @@ namespace Slot_Machine
                 {
                     for (int j = 0; j < COLS; j++)                       //col
                     {
-                        grid[i, j] = rnd.Next(0, 5);
+                        grid[i, j] = rnd.Next(GRID_MIN, GRID_MAX);
                     }
                 }
                 //print grid
@@ -166,10 +169,13 @@ namespace Slot_Machine
                     }
 
                 }
-                else //change to else?
+                if (win)  //else                    //change to else?
                 {
+                    // int winnings = betAmount * PAYOUT
+                    // balance + winnings;
+                    //
                     Console.WriteLine("You win");
-                    Console.WriteLine("You have won??????????");
+                    //Console.WriteLine($"You have won {winnings}");
                     //output winnings, need calculation
                 }
                 if (balance == 0)
@@ -181,6 +187,10 @@ namespace Slot_Machine
         }
     }
 }
+//update balance on lose senario within each mode 
+//compare update balance between modes to see if this can be done generically 
+//consider/calculate win lose amount
+//refer to tiles cost cal 
 
 
 

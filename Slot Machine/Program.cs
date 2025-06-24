@@ -16,7 +16,8 @@ namespace Slot_Machine
             const int COLS = 3;
             const int PAYOUT1 = 6;
             const int PAYOUT2 = 0;
-            int balance = 0;
+
+            int balance = 50;
             int betAmount = 3;
 
 
@@ -29,22 +30,28 @@ namespace Slot_Machine
 
             string mode = Console.ReadLine();
 
-            int selectedMode = int.Parse(mode);                         //convert string to int 
+            int selectedMode = int.Parse(mode);                         //convert string to int                       
 
-            Console.WriteLine($"You have selected {selectedMode}");
             if (selectedMode > 4)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
             {
                 Console.WriteLine("Invalid selection try again");
                 return;
             }
-            Console.WriteLine($"Your bet amount is {betAmount}");
+            Console.WriteLine($"You have selected {selectedMode}");
+            Console.WriteLine($"Your starting balance is {balance}");
+            Console.WriteLine($"Your default bet amount is {betAmount}");
                        
 
             while (balance > 0)
             {
-                Console.WriteLine($"your current balance is {balance}");
-                Console.WriteLine("How much do you want to bet");
-                                              
+                //Console.WriteLine($"your current balance is {balance}");
+                //Console.WriteLine("How much do you want to bet");
+                if (betAmount > balance)
+                {
+                    Console.WriteLine("you do not have enough in your balance for that bet");
+                    continue;
+                }
+
 
                 int[,] grid = new int[ROWS, COLS];                         //2D array 
 
@@ -169,11 +176,7 @@ namespace Slot_Machine
                 {
                     Console.WriteLine("Sorry, you do not have any credit left to continue");
                 }
-                if (betAmount > balance)
-                {
-                    Console.WriteLine("you do not have enough in your balance for that bet");
-                }
-
+                
             }
         }
     }

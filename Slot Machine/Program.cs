@@ -17,12 +17,10 @@ namespace Slot_Machine
             const int COLS = 3;
             const int PAYOUT = 3;
             const int GRID_MAX = 5;
-            const int GRID_MIN = 0;         
+            const int GRID_MIN = 0;       
 
-
-            int balance = 50;
+            int balance = 50;   //saved value
             int betAmount = 3;
-
 
             Console.WriteLine("Welcome to the Slots Machine");
             Console.WriteLine($"Please select the mode you wish to play");
@@ -34,12 +32,11 @@ namespace Slot_Machine
             Console.WriteLine($"Your starting balance is {balance}");
             Console.WriteLine($"Your default bet amount is {betAmount}");
 
-
             while (balance > 0)
             {
                 string mode = Console.ReadLine();
 
-                int selectedMode = int.Parse(mode);                         //convert string to int                       
+                int selectedMode = int.Parse(mode);  //tryParse - look at link sent on whatsapp                       //convert string to int                       
 
                 if (selectedMode > INVALID)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
                 {
@@ -47,7 +44,8 @@ namespace Slot_Machine
                     return;
                 }
                 Console.WriteLine($"You have selected {selectedMode}");
-                Console.WriteLine($"Your balance is {balance - betAmount}");
+                balance = balance - betAmount;  //updated value
+                Console.WriteLine($"Your balance is now {balance}");
                 
 
                 //Console.WriteLine($"your current balance is {balance}");
@@ -93,7 +91,7 @@ namespace Slot_Machine
                 Console.WriteLine();
 
                 bool win = true;                                //check grid/winnings 
-
+                
                 if (selectedMode == MIDLINE)
                 {
                     int midRow = ROWS / 2;
@@ -174,27 +172,25 @@ namespace Slot_Machine
                         //    Console.WriteLine("You win on line 2");
                         //}
                     }
-
-                }
-
-                //if (win = false) 
-                //{
-                //    Console.WriteLine($"Your balance is now {balance - betAmount}");
-                //}
+                }                            
 
                 if (win)  //else                    //change to else?
                 {
                     int winnings = betAmount + PAYOUT;
-                    // balance + winnings;
-                    //
-                    Console.WriteLine("You win");
-                    Console.WriteLine($"Your new balance is {winnings + balance}");
+                    balance = balance + winnings;//updated value                                       
+                    Console.WriteLine($"YOU WIN,you have won £{PAYOUT}, your new balance is £{balance}");
+                    return;
                     //Console.WriteLine($"You have won {winnings}");
                     //output winnings, need calculation
                 }
+                //else 
+                //{
+                //    Console.WriteLine($"you lose, your balance is {balance - betAmount}");                
+                //}
                 if (balance == 0)
                 {
                     Console.WriteLine("Sorry, you do not have any credit left to continue");
+                    break;
                 }
                 
             }

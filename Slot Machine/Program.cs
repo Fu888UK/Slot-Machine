@@ -29,8 +29,11 @@ namespace Slot_Machine
             Console.WriteLine($"{MIDLINE} = Middle line");
             Console.WriteLine($"{HORILINES} = Horizontal lines");
             Console.WriteLine($"{VERTLINES} = Verticle lines");
-            Console.WriteLine($"{DIAGLINES} = Diagonal lines");           
-                       
+            Console.WriteLine($"{DIAGLINES} = Diagonal lines");
+
+            Console.WriteLine($"Your starting balance is {balance}");
+            Console.WriteLine($"Your default bet amount is {betAmount}");
+
 
             while (balance > 0)
             {
@@ -40,12 +43,12 @@ namespace Slot_Machine
 
                 if (selectedMode > INVALID)               //if users enters anything apart from 1 2 3 4 need to enter 'if' to fix this, refer to 1st project
                 {
-                    Console.WriteLine("Invalid selection try again");
+                    Console.WriteLine("Invalid selection please try again with a valid selection");
                     return;
                 }
                 Console.WriteLine($"You have selected {selectedMode}");
-                Console.WriteLine($"Your starting balance is {balance}");
-                Console.WriteLine($"Your default bet amount is {betAmount}");
+                Console.WriteLine($"Your balance is {balance - betAmount}");
+                
 
                 //Console.WriteLine($"your current balance is {balance}");
                 //Console.WriteLine("How much do you want to bet");
@@ -102,6 +105,7 @@ namespace Slot_Machine
                         {
                             win = false;
                             Console.WriteLine("middle row lose");
+                            //Console.WriteLine($"Your balance is now {balance - betAmount}");
                             break;
                         }
                     }
@@ -116,6 +120,7 @@ namespace Slot_Machine
                             {
                                 win = false;
                                 Console.WriteLine($"You lose on horizontal line {i + 1}!");
+                                //Console.WriteLine($"Your balance is now {balance - betAmount}");
                                 break;
                             }
                         }
@@ -131,6 +136,7 @@ namespace Slot_Machine
                             {
                                 win = false;
                                 Console.WriteLine($"You LOSE on vertical line {i + 1}!");
+                                //Console.WriteLine($"Your balance is now {balance - betAmount}");
                                 break;
                             }
                         }
@@ -145,6 +151,7 @@ namespace Slot_Machine
                         {
                             win = false;
                             Console.WriteLine("You lose on line 1");
+                            //Console.WriteLine($"Your balance is now {balance - betAmount}");
                             break;
 
                         }
@@ -169,12 +176,19 @@ namespace Slot_Machine
                     }
 
                 }
+
+                //if (win = false) 
+                //{
+                //    Console.WriteLine($"Your balance is now {balance - betAmount}");
+                //}
+
                 if (win)  //else                    //change to else?
                 {
-                    // int winnings = betAmount * PAYOUT
+                    int winnings = betAmount + PAYOUT;
                     // balance + winnings;
                     //
                     Console.WriteLine("You win");
+                    Console.WriteLine($"Your new balance is {winnings + balance}");
                     //Console.WriteLine($"You have won {winnings}");
                     //output winnings, need calculation
                 }

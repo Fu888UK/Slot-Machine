@@ -19,8 +19,8 @@ namespace Slot_Machine
             const int GRID_MAX = 5;
             const int GRID_MIN = 0;       
 
-            int balance = 50;   //saved value
-            int betAmount = 3;
+            int INITIAL_BALANCE = 50;   //saved value
+            const int BET_AMOUNT = 3;
 
             Console.WriteLine("Welcome to the Slots Machine");
             Console.WriteLine($"Please select the mode you wish to play");
@@ -29,10 +29,10 @@ namespace Slot_Machine
             Console.WriteLine($"{VERTLINES} = Verticle lines");
             Console.WriteLine($"{DIAGLINES} = Diagonal lines");
 
-            Console.WriteLine($"Your starting balance is {balance}");
-            Console.WriteLine($"Your default bet amount is {betAmount}");
+            Console.WriteLine($"Your starting balance is {INITIAL_BALANCE}");
+            Console.WriteLine($"Your default bet amount is {BET_AMOUNT}");
 
-            while (balance > 0)
+            while (INITIAL_BALANCE > 0)
             {
                 string mode = Console.ReadLine();
 
@@ -44,13 +44,13 @@ namespace Slot_Machine
                     return;
                 }
                 Console.WriteLine($"You have selected {selectedMode}");
-                balance = balance - betAmount;  //updated value
-                Console.WriteLine($"Your balance is now {balance}");
+                INITIAL_BALANCE = INITIAL_BALANCE - BET_AMOUNT;  //updated value
+                Console.WriteLine($"Your balance is now {INITIAL_BALANCE}");
                 
 
                 //Console.WriteLine($"your current balance is {balance}");
                 //Console.WriteLine("How much do you want to bet");
-                if (betAmount > balance)
+                if (BET_AMOUNT > INITIAL_BALANCE)
                 {
                     Console.WriteLine("you do not have enough in your balance for that bet");
                     return;
@@ -103,9 +103,10 @@ namespace Slot_Machine
                         {
                             win = false;
                             Console.WriteLine("middle row lose");
+                            //Console.WriteLine("Please select a mode for your next spin");
                             //Console.WriteLine($"Your balance is now {balance - betAmount}");
-                            break;
-                        }
+                            break;                            
+                        }                        
                     }
                 }
                 if (selectedMode == HORILINES)
@@ -117,9 +118,10 @@ namespace Slot_Machine
                             if (grid[i, 0] != grid[i, j]) //&& grid[i, 1] == grid[i, 2])   //checking for values are the same                                                   
                             {
                                 win = false;
-                                Console.WriteLine($"You lose on horizontal line {i + 1}!");
+                                Console.WriteLine($"You lose on horizontal line {i + 1}!");                                
                                 //Console.WriteLine($"Your balance is now {balance - betAmount}");
                                 break;
+                                Console.WriteLine("Please select a mode for your next spin");
                             }
                         }
                     }
@@ -172,13 +174,17 @@ namespace Slot_Machine
                         //    Console.WriteLine("You win on line 2");
                         //}
                     }
-                }                            
+                }   
+                //if (win = false) 
+                //{
+                //    Console.WriteLine("Please select a mode for your next spin");
+                //}
 
                 if (win)  //else                    //change to else?
                 {
-                    int winnings = betAmount + PAYOUT;
-                    balance = balance + winnings;//updated value                                       
-                    Console.WriteLine($"YOU WIN,you have won £{PAYOUT}, your new balance is £{balance}");
+                    int winnings = BET_AMOUNT + PAYOUT;
+                    INITIAL_BALANCE = INITIAL_BALANCE + winnings;//updated value                                       
+                    Console.WriteLine($"YOU WIN,you have won £{PAYOUT}, your new balance is £{INITIAL_BALANCE}");
                     return;
                     //Console.WriteLine($"You have won {winnings}");
                     //output winnings, need calculation
@@ -187,7 +193,7 @@ namespace Slot_Machine
                 //{
                 //    Console.WriteLine($"you lose, your balance is {balance - betAmount}");                
                 //}
-                if (balance == 0)
+                if (INITIAL_BALANCE == 0)
                 {
                     Console.WriteLine("Sorry, you do not have any credit left to continue");
                     break;

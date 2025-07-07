@@ -29,7 +29,6 @@ namespace Slot_Machine
             Console.WriteLine($"{HORILINES} = Horizontal lines");
             Console.WriteLine($"{VERTLINES} = Verticle lines");
             Console.WriteLine($"{DIAGLINES} = Diagonal lines");
-
             Console.WriteLine($"Your starting balance is {balance}");
             Console.WriteLine($"Your default bet amount is {BET_AMOUNT}");
 
@@ -147,8 +146,7 @@ namespace Slot_Machine
                             break;
                         }
                     }
-                }               
-
+                }    
                 if (win)                    
                 {
                     int winnings = BET_AMOUNT + PAYOUT;

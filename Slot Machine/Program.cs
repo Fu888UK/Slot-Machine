@@ -48,7 +48,7 @@ namespace Slot_Machine
                 if (selectedMode > INVALID)
                 {
                     Console.WriteLine("Invalid selection please try again with a valid selection");
-                    return;
+                    continue;
                 }
                 Console.WriteLine($"You have selected {selectedMode}");
                 balance = balance - BET_AMOUNT;  
